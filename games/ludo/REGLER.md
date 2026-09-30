@@ -60,3 +60,13 @@ Den første som får alle sine fire brikker i mål, vinner.
 - **Tre seksere på rad:** turen avsluttes (se over).
 - **Sikre felt:** merkede eller fargede felt beskytter brikkene som står der.
 - **Ut på ener eller sekser:** en brikke kan komme ut av hjemmefeltet både på ener og sekser. Det gir et raskere spill.
+
+## Vår versjon
+
+Valgene som gjelder for ludo-spillet i dette repoet:
+
+- **To spillere:** du (rød) mot datamaskinen (gul), på hver sin side av brettet.
+- **Fire brikker** hver.
+- **Kun grunnreglene.** Ingen husregler eller varianter: ingen tårn, ingen grense på tre seksere, ingen sikre felt (heller ikke startfeltene).
+- **For høyt kast i innløpet:** brikken kan ikke flyttes med det kastet (alternativ b).
+- **Hvem begynner:** begge kaster, og den med høyest kast begynner (nytt kast ved likt).

@@ -6,5 +6,6 @@
 //   description: "Spis eplene uten å krasje i deg selv." },
 
 window.GAMES = [
-  // (ingen spill ennå)
+  { id: "ludo", title: "Ludo", emoji: "🎲", minutes: 15,
+    description: "Klassisk ludo mot datamaskinen. Få alle fire brikkene i mål først." },
 ];

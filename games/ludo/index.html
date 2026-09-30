@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ludo – Minispill</title>
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <a class="back" href="../../index.html">← Alle spill</a>
+
+    <div class="game-header">
+      <h1>Ludo</h1>
+      <div class="stats">
+        <div><span>Tur</span> <strong id="turn">–</strong></div>
+        <div><span>Dine kast</span> <strong id="throws">0</strong></div>
+        <div><span>Rekord</span> <strong id="best">–</strong></div>
+      </div>
+    </div>
+
+    <div class="board ludo-wrap">
+      <div id="ludo" class="ludo-board" aria-label="Ludobrett"></div>
+    </div>
+
+    <p id="message" class="message"></p>
+
+    <div class="controls">
+      <div id="dice" class="dice" aria-live="polite"></div>
+      <button id="roll" class="btn primary">Kast terningen</button>
+      <button id="new" class="btn">Nytt spill</button>
+    </div>
+
+    <p class="help">
+      Du er <strong>rød</strong>, datamaskinen er <strong>gul</strong>.
+      Kast med knappen eller mellomrom, og velg brikke ved å klikke eller trykke 1–4.
+      <a href="REGLER.md">Regler</a>
+    </p>
+  </main>
+
+  <script src="../../shared/common.js"></script>
+  <script src="logic.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

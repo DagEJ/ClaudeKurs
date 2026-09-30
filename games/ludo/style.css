@@ -1,0 +1,115 @@
+/* Stil som bare gjelder ludo. */
+
+.red    { --c: var(--p-red); }
+.green  { --c: var(--p-green); }
+.yellow { --c: var(--p-yellow); }
+.blue   { --c: var(--p-blue); }
+
+.ludo-wrap { padding: 12px; }
+
+.ludo-board {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  grid-template-rows: repeat(15, 1fr);
+  width: min(100%, 540px);
+  aspect-ratio: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cell { box-shadow: inset 0 0 0 0.5px var(--border); }
+.cell.home { background: color-mix(in srgb, var(--c) 55%, var(--surface)); }
+.cell.start { background: var(--c); }
+
+.yard {
+  background: var(--c);
+  position: relative;
+}
+.yard::after {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  background: var(--surface);
+  border-radius: 12px;
+}
+.yard.inactive, .cell.inactive { opacity: 0.35; }
+
+.slot {
+  z-index: 1;
+  margin: 12%;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c) 25%, var(--surface));
+}
+.slot.inactive { opacity: 0.35; }
+
+.center {
+  background: conic-gradient(
+    from -45deg,
+    var(--p-green) 0 25%,
+    var(--p-yellow) 0 50%,
+    var(--p-blue) 0 75%,
+    var(--p-red) 0
+  );
+}
+
+/* Brikker */
+
+.stack {
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.piece {
+  pointer-events: auto;
+  width: 78%;
+  aspect-ratio: 1;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+  background: var(--c);
+  color: var(--on-player);
+  font: inherit;
+  font-size: clamp(8px, 2.2vw, 12px);
+  font-weight: 700;
+  box-shadow: var(--shadow);
+  cursor: default;
+}
+.stack.multi .piece { width: 48%; border-width: 1px; }
+.piece.done { border-color: var(--text); }
+
+.piece.movable {
+  cursor: pointer;
+  outline: 3px solid var(--text);
+  outline-offset: 1px;
+  animation: pulse 0.9s ease-in-out infinite alternate;
+}
+@keyframes pulse { to { transform: scale(1.12); } }
+
+/* Terning */
+
+.dice {
+  width: 52px;
+  height: 52px;
+  padding: 7px;
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  gap: 2px;
+  background: var(--surface);
+  border: 3px solid var(--c);
+  border-radius: 10px;
+}
+.dice span { border-radius: 50%; }
+.dice span.on { background: var(--text); }
+.dice.rolling { animation: shake 0.25s; }
+@keyframes shake {
+  25% { transform: rotate(-12deg); }
+  75% { transform: rotate(12deg); }
+}
+
+.controls { align-items: center; }
