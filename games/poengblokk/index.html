@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Poengblokk – Minispill</title>
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container narrow">
+    <a class="back" href="../../index.html">← Alle spill</a>
+
+    <div class="game-header">
+      <h1>Poengblokk</h1>
+      <div class="stats">
+        <div><span>Runde</span> <strong id="round">–</strong></div>
+      </div>
+    </div>
+
+    <div id="board" class="board pboard setup-view">
+      <div id="setup" class="setup">
+        <div class="field">
+          <span class="label">Mal</span>
+          <div id="templates" class="chips" role="group" aria-label="Mal"></div>
+        </div>
+
+        <div class="field">
+          <span class="label">Slik telles det</span>
+          <div id="modes" class="chips" role="group" aria-label="Slik telles det">
+            <button class="chip" data-mode="hoyest">Høyest vinner</button>
+            <button class="chip" data-mode="lavest">Lavest vinner</button>
+            <button class="chip" data-mode="nedtelling">Nedtelling</button>
+          </div>
+        </div>
+
+        <div class="limits">
+          <label id="f-start" class="field">
+            <span class="label">Teller ned fra</span>
+            <input id="start" class="box" type="number" inputmode="numeric" min="1">
+          </label>
+          <label id="f-target" class="field">
+            <span class="label">Slutt ved poengsum</span>
+            <input id="target" class="box" type="number" inputmode="numeric" min="1" placeholder="ingen">
+          </label>
+          <label id="f-rounds" class="field">
+            <span class="label">Antall runder</span>
+            <input id="rounds" class="box" type="number" inputmode="numeric" min="1" placeholder="fritt">
+          </label>
+        </div>
+
+        <div class="field">
+          <span class="label">Spillere</span>
+          <div id="players" class="players"></div>
+          <button id="add" class="btn small">+ Spiller</button>
+        </div>
+
+        <div class="dock-buttons">
+          <button id="go" class="btn primary">Start</button>
+          <button id="back" class="btn" hidden>Tilbake til spillet</button>
+        </div>
+      </div>
+
+      <div id="pad" class="pad">
+        <p id="summary" class="caption"></p>
+        <div class="tablewrap">
+          <table id="table" class="sheet"></table>
+        </div>
+        <div class="dock-buttons">
+          <button id="next" class="btn primary">Neste runde</button>
+          <button id="again" class="btn primary" hidden>Ny omgang</button>
+          <button id="resume" class="btn" hidden>Fortsett spillet</button>
+          <button id="undo" class="btn">Slett siste runde</button>
+          <button id="end" class="btn">Avslutt</button>
+        </div>
+      </div>
+    </div>
+
+    <p id="message" class="message" aria-live="polite"></p>
+
+    <div class="controls">
+      <button id="new" class="btn">Nytt oppsett</button>
+    </div>
+
+    <p class="help">
+      Skriv poeng i rutene. Enter går til neste spiller og fører runden. Tidligere ruter kan rettes.
+      <a href="REGLER.md">Slik virker den</a>
+    </p>
+  </main>
+
+  <script src="../../shared/common.js"></script>
+  <script src="logic.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

@@ -6,6 +6,8 @@
 //   description: "Spis eplene uten å krasje i deg selv." },
 
 window.GAMES = [
+  { id: "poengblokk", title: "Poengblokk", emoji: "📝",
+    description: "Før poeng for kortspill, minigolf, dart og annet. Maler, nedtelling fra 501 og automatisk sum og vinner." },
   { id: "slagskip", title: "Slagskip", emoji: "🚢", minutes: 4,
     description: "Legg ut flåten din og senk datamaskinens skip før den senker dine. Treff gir nytt skudd – tre nivåer." },
   { id: "othello", title: "Othello", emoji: "⚫", minutes: 4,

@@ -27,6 +27,24 @@
     return isRecord;
   }
 
+  // Lagrer og henter en hel verdi (JSON), f.eks. et spill som pågår. load gir null hvis ingenting er lagret.
+  function load(key) {
+    try {
+      const raw = localStorage.getItem(PREFIX + key);
+      return raw === null ? null : JSON.parse(raw);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function save(key, value) {
+    try {
+      localStorage.setItem(PREFIX + key, JSON.stringify(value));
+    } catch (e) {
+      /* localStorage utilgjengelig – verdien gjelder bare denne økten */
+    }
+  }
+
   // Heltall i [min, max], begge inkludert.
   function randInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -115,5 +133,5 @@
     return container.querySelector(":scope > .overlay") !== null;
   }
 
-  window.Common = { getBest, saveBest, randInt, formatTime, showOverlay, hideOverlay, isOverlayOpen };
+  window.Common = { getBest, saveBest, load, save, randInt, formatTime, showOverlay, hideOverlay, isOverlayOpen };
 })();

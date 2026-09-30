@@ -1,0 +1,129 @@
+/* Stil som bare gjelder Poengblokk. Farger fra shared/style.css. */
+
+.narrow { max-width: 640px; }
+
+.board.pboard {
+  display: block;
+  padding: 14px;
+  min-height: 0;
+}
+.setup-view .pad, .pad-view .setup { display: none; }
+
+/* ---------- Oppsett ---------- */
+
+.setup { display: flex; flex-direction: column; gap: 14px; }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.field[hidden] { display: none; }
+.label { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+}
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+.chip:focus-visible, .remove:focus-visible { outline: 3px solid var(--text); outline-offset: 1px; }
+
+.limits { display: flex; flex-wrap: wrap; gap: 12px; }
+.limits .field { flex: 1 1 140px; }
+
+.box {
+  font: inherit;
+  width: 100%;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+}
+.box:focus, .num:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+.box::placeholder { color: var(--muted); }
+
+.players { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; }
+.player { display: flex; gap: 6px; }
+.remove {
+  flex: none;
+  width: 38px;
+  font: inherit;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+}
+.remove:hover { border-color: var(--bad); color: var(--bad); }
+.remove:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn.small { align-self: flex-start; padding: 6px 14px; font-size: 0.92rem; }
+
+.dock-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.dock-buttons .btn { padding: 8px 14px; }
+
+/* ---------- Blokka ---------- */
+
+.pad { display: flex; flex-direction: column; gap: 12px; }
+.caption { margin: 0; font-size: 0.88rem; font-weight: 600; color: var(--muted); text-align: center; }
+
+.tablewrap { overflow-x: auto; }
+.sheet { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.sheet th, .sheet td { padding: 3px; text-align: center; }
+.sheet .no {
+  width: 30px;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+.sheet thead th { min-width: 58px; padding-bottom: 8px; vertical-align: bottom; border-bottom: 2px solid var(--border); }
+.sheet col.p { min-width: 58px; width: auto; }
+.pname {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.total { display: block; font-family: var(--mono); font-size: 1.35rem; line-height: 1.2; }
+.lead .pname, .lead .total { color: var(--accent); }
+.lead .pname::before { content: "★ "; }
+
+.num {
+  font: inherit;
+  font-family: var(--mono);
+  width: 100%;
+  min-width: 0;
+  padding: 6px 2px;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: none;
+  color: var(--text);
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.num::-webkit-outer-spin-button, .num::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.num:hover { border-color: var(--border); }
+.num.bust { color: var(--bad); text-decoration: line-through; }
+.sheet tbody tr:nth-child(odd) td, .sheet tbody tr:nth-child(odd) th { background: color-mix(in srgb, var(--bg) 60%, transparent); }
+
+/* Runden som føres nå */
+.sheet tfoot td, .sheet tfoot th { padding-top: 8px; border-top: 2px solid var(--border); }
+.sheet tfoot .no { color: var(--accent); font-weight: 700; }
+.sheet tfoot .num { padding: 9px 2px; border-color: var(--accent); background: var(--bg); }
+.over .sheet tfoot { display: none; }
+
+@media (max-width: 480px) {
+  .board.pboard { padding: 10px; }
+  .total { font-size: 1.15rem; }
+  .dock-buttons .btn { padding: 8px 12px; font-size: 0.95rem; }
+}
