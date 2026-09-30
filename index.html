@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minispill</title>
+  <link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Minispill</h1>
+    <p class="subtitle">Små spill du rekker på noen få minutter.</p>
+    <div id="games" class="game-grid"></div>
+  </main>
+
+  <script src="shared/common.js"></script>
+  <script src="games/registry.js"></script>
+  <script>
+    (function () {
+      const root = document.getElementById("games");
+      const games = window.GAMES || [];
+
+      if (games.length === 0) {
+        root.outerHTML =
+          '<div class="empty">Ingen spill ennå. Kopier <code>games/_mal/</code> for å lage det første.</div>';
+        return;
+      }
+
+      for (const g of games) {
+        const a = document.createElement("a");
+        a.className = "game-card";
+        a.href = "games/" + g.id + "/";
+
+        const best = Common.getBest(g.id);
+        const meta = [];
+        if (g.minutes) meta.push("ca. " + g.minutes + " min");
+        if (best !== null) meta.push("Rekord: " + best);
+
+        a.innerHTML =
+          '<div class="emoji"></div><h2></h2><p></p><div class="meta"></div>';
+        a.querySelector(".emoji").textContent = g.emoji || "🎮";
+        a.querySelector("h2").textContent = g.title;
+        a.querySelector("p").textContent = g.description || "";
+        a.querySelector(".meta").textContent = meta.join(" · ");
+        root.appendChild(a);
+      }
+    })();
+  </script>
+</body>
+</html>

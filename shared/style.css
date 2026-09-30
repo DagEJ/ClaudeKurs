@@ -1,0 +1,142 @@
+/* Felles stil for forsiden og alle spill. */
+
+:root {
+  --bg: #f6f5f1;
+  --surface: #ffffff;
+  --text: #1d1d1f;
+  --muted: #6b6b70;
+  --border: #e2e0da;
+  --accent: #d9622b;
+  --accent-text: #ffffff;
+  --good: #2f8f5b;
+  --bad: #c43d3d;
+  --radius: 12px;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.05);
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17171a;
+    --surface: #222226;
+    --text: #ececef;
+    --muted: #9b9ba3;
+    --border: #34343a;
+    --accent: #f0804a;
+    --accent-text: #17171a;
+    --good: #5cc48a;
+    --bad: #f07070;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.5;
+}
+
+a { color: var(--accent); }
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+h1 { font-size: 2rem; margin: 0 0 4px; letter-spacing: -0.02em; }
+.subtitle { color: var(--muted); margin: 0 0 32px; }
+
+/* ---------- Forside ---------- */
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.game-card {
+  display: block;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+.game-card:hover, .game-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+.game-card .emoji { font-size: 2.25rem; line-height: 1; }
+.game-card h2 { font-size: 1.15rem; margin: 12px 0 4px; }
+.game-card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.game-card .meta { margin-top: 12px; font-size: 0.85rem; color: var(--muted); }
+
+.empty {
+  padding: 32px;
+  text-align: center;
+  color: var(--muted);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+/* ---------- Spillside ---------- */
+
+.back { display: inline-block; margin-bottom: 16px; text-decoration: none; }
+
+.game-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-bottom: 16px;
+}
+
+.stats { display: flex; gap: 20px; font-family: var(--mono); }
+.stats span { color: var(--muted); }
+.stats strong { color: var(--text); }
+
+.board {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.message { min-height: 1.5em; margin: 16px 0; text-align: center; }
+.message.good { color: var(--good); }
+.message.bad { color: var(--bad); }
+
+.controls { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+.btn {
+  font: inherit;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.help { color: var(--muted); font-size: 0.9rem; text-align: center; margin-top: 24px; }

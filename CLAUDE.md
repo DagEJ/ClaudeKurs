@@ -1,0 +1,58 @@
+# ClaudeKurs – minispill
+
+En samling små enmannsspill som kan spilles på noen få minutter.
+Ren HTML, CSS og JavaScript: ingen rammeverk, ingen byggesteg, ingen npm-avhengigheter.
+
+## Struktur
+
+```
+index.html            Forside som lister alle spill (leser games/registry.js)
+shared/style.css      Felles stil: farger, typografi, knapper, spill-layout
+shared/common.js      Felles hjelpere (window.Common): rekord, formatering, tilfeldige tall
+games/registry.js     Liste over spill som vises på forsiden
+games/_mal/           Mal for nye spill – kopier denne, ikke endre den
+games/<navn>/         Ett spill per mappe
+```
+
+Hvert spill har nøyaktig disse filene:
+
+| Fil | Innhold |
+|---|---|
+| `index.html` | Siden: tilbake-lenke, tittel, status, spillflate, knapper |
+| `logic.js` | **Ren spill-logikk.** Ingen DOM, ingen `window`, ingen tid/tilfeldighet som ikke sendes inn. |
+| `game.js` | Tegning, input og spill-løkke. Kaller funksjoner i `logic.js`. |
+| `style.css` | Kun det som er spesifikt for dette spillet. |
+| `logic.test.js` | Tester for `logic.js` med Node sin innebygde testløper. |
+
+## Legge til et nytt spill
+
+1. Kopier `games/_mal/` til `games/<navn>/` (små bokstaver, bindestrek, f.eks. `snake`, `minesweeper`).
+2. Bytt ut malens logikk, tegning og tekst.
+3. Legg spillet til i `games/registry.js`.
+4. Kjør testene (se under) og åpne spillet i nettleseren.
+
+## Konvensjoner
+
+- **Ingen ES-moduler (`import`/`export`).** Sidene skal fungere når `index.html` åpnes direkte fra disk (`file://`), der moduler blokkeres. Bruk vanlige `<script>`-tagger.
+- `logic.js` eksporterer ett objekt, og avslutter med
+  `if (typeof module !== "undefined") module.exports = X;` slik at Node-testene kan laste den.
+- Logikken er ren: den tar inn tilstand (og evt. tidssteg eller tilfeldig tall) og returnerer ny tilstand. Tid og tilfeldighet sendes inn fra `game.js`, slik at logikken kan testes.
+- Bruk fargene og klassene i `shared/style.css` (CSS-variabler som `--accent`). Ikke hardkod farger i spillene.
+- Spill skal kunne spilles med både mus/touch og tastatur der det gir mening, og fungere på mobilbredde.
+- Et spill skal ta **noen få minutter**. Hold det lite.
+- Tekst i brukergrensesnittet er på norsk.
+- Rekorder lagres med `Common.getBest` / `Common.saveBest` (tåler at localStorage mangler).
+
+## Sjekke arbeidet
+
+```
+node --test
+```
+
+kjører alle `logic.test.js`. Alle tester skal passere før en endring commites.
+Åpne også spillet i nettleseren og spill en runde: sjekk at det ikke er feil i konsollen.
+
+## Publisering
+
+Nettstedet kan publiseres med GitHub Pages fra `main`-grenen (roten).
+`.nojekyll` gjør at mapper som starter med `_` (som `_mal`) også publiseres.

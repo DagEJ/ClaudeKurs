@@ -1,0 +1,17 @@
+/* Stil som bare gjelder dette spillet. */
+
+.target {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: var(--accent-text);
+  font: inherit;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.05s ease;
+}
+.target:active:not(:disabled) { transform: scale(0.94); }
+.target:disabled { opacity: 0.35; cursor: default; }
