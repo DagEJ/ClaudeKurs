@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minesveiper – Minispill</title>
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container narrow">
+    <a class="back" href="../../index.html">← Alle spill</a>
+
+    <div class="game-header">
+      <h1>Minesveiper</h1>
+      <div class="stats">
+        <div><span>Miner</span> <strong id="mines">15</strong></div>
+        <div><span>Tid</span> <strong id="time">0:00</strong></div>
+        <div><span>Rekord</span> <strong id="best">–</strong></div>
+      </div>
+    </div>
+
+    <div class="levels" role="group" aria-label="Nivå">
+      <button class="level" data-level="lett" aria-pressed="false">Lett</button>
+      <button class="level" data-level="middels" aria-pressed="true">Middels</button>
+      <button class="level" data-level="vanskelig" aria-pressed="false">Vanskelig</button>
+    </div>
+
+    <div id="board" class="board msboard">
+      <div id="grid" class="ms" role="group" aria-label="Brett"></div>
+    </div>
+
+    <p id="message" class="message" aria-live="polite"></p>
+
+    <div class="controls">
+      <button id="new" class="btn primary">Nytt spill</button>
+    </div>
+
+    <p class="help">
+      Trykk for å åpne, hold inne eller høyreklikk for flagg. Piler, Enter og F på tastaturet.
+      <a href="REGLER.md">Regler</a>
+    </p>
+  </main>
+
+  <script src="../../shared/common.js"></script>
+  <script src="logic.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

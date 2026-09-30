@@ -6,6 +6,8 @@
 //   description: "Spis eplene uten å krasje i deg selv." },
 
 window.GAMES = [
+  { id: "minesveiper", title: "Minesveiper", emoji: "💣", minutes: 3,
+    description: "Rydd brettet uten å treffe en mine. Første klikk er alltid trygt – tre nivåer, raskeste tid teller." },
   { id: "fire-pa-rad", title: "Fire på rad", emoji: "🔴", minutes: 3,
     description: "Få fire på rad før datamaskinen. Tre nivåer – hvor lang seiersrekke klarer du?" },
   { id: "2048", title: "2048", emoji: "🔢", minutes: 2,

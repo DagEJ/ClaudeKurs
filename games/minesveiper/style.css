@@ -1,0 +1,105 @@
+/* Stil som bare gjelder Minesveiper. Farger fra shared/style.css. */
+
+.narrow { max-width: 560px; }
+
+/* Nivåvelger */
+.levels {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 12px;
+  width: fit-content;
+  max-width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.level {
+  font: inherit;
+  font-weight: 600;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+.level[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); }
+.level:focus-visible { outline: 3px solid var(--text); outline-offset: 1px; }
+
+/* Brett */
+.board.msboard { padding: 12px; min-height: 0; }
+
+.ms {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: 3px;
+  width: 100%;
+  max-width: calc(var(--cols) * 46px);
+  container-type: inline-size;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+
+.cell {
+  aspect-ratio: 1;
+  min-width: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 5px;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: calc(100cqw / var(--cols) * 0.52);
+  line-height: 1;
+  color: var(--text);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Dekket rute: litt løftet */
+.cell.covered {
+  background: color-mix(in srgb, var(--muted) 38%, var(--surface));
+  box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--text) 18%, transparent);
+}
+.ms.live .cell.covered:hover { background: color-mix(in srgb, var(--muted) 55%, var(--surface)); }
+.ms.live .cell.covered:active { box-shadow: none; }
+
+/* Åpnet rute: flat */
+.cell.open { background: var(--bg); cursor: default; }
+.ms.live .cell.open.num { cursor: pointer; }
+
+.cell.n1 { color: var(--p-blue); }
+.cell.n2 { color: var(--p-green); }
+.cell.n3 { color: var(--p-red); }
+.cell.n4 { color: var(--accent); }
+.cell.n5 { color: var(--bad); }
+.cell.n6 { color: var(--good); }
+.cell.n7 { color: var(--text); }
+.cell.n8 { color: var(--muted); }
+
+.cell.exploded { background: var(--bad); }
+/* Flagg som sto feil: strek over */
+.cell.wrong { position: relative; }
+.cell.wrong::after {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  background: linear-gradient(to top right, transparent 44%, var(--bad) 44% 56%, transparent 56%);
+}
+.cell.pop { animation: pop 140ms ease-out; }
+@keyframes pop { from { transform: scale(0.7); } }
+
+/* Markør for tastaturet */
+.ms.keys .cell.sel { outline: 3px solid var(--accent); outline-offset: -1px; z-index: 1; }
+.cell:focus { outline: none; }
+
+.ms:not(.live) .cell { cursor: default; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cell.pop { animation: none; }
+}
