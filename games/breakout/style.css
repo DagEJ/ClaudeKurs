@@ -1,0 +1,22 @@
+/* Stil som bare gjelder Breakout. Farger fra shared/style.css. */
+
+.narrow { max-width: 560px; }
+
+.stats { gap: 14px; flex-wrap: wrap; }
+
+.bboard {
+  padding: 8px;
+  min-height: 0;
+}
+
+.bboard canvas {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 320 / 400;
+  margin: 0 auto;
+  border-radius: 8px;
+  background: var(--bg);
+  touch-action: none; /* dra med fingeren uten at siden ruller */
+}
+.bboard.live canvas { cursor: none; }
