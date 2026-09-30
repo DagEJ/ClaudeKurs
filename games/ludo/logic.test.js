@@ -80,7 +80,42 @@ test("å gå forbi en motstander slår den ikke ut", () => {
   assert.equal(s.players[1].pieces[0], 4);
 });
 
-test("startfeltet er ikke sikkert: sette ut på sekser slår ut motstander der", () => {
+test("kan ikke lande på en trygg brikke på dens eget startfelt", () => {
+  // Gul på relativ 0 = absolutt 26 (gults startfelt). Rød på relativ 23 ville landet der med 3.
+  const before = withPieces([23, -1, -1, -1], [0, -1, -1, -1]);
+  assert.deepEqual(Ludo.legalMoves(before, 3), []);
+  const s = Ludo.roll(before, 3);
+  assert.equal(s.current, 1); // ingen lovlige trekk, turen går videre
+  assert.equal(s.players[0].pieces[0], 23);
+  assert.equal(s.players[1].pieces[0], 0);
+});
+
+test("kan hoppe over en trygg brikke", () => {
+  let s = withPieces([23, -1, -1, -1], [0, -1, -1, -1]);
+  s = Ludo.move(Ludo.roll(s, 5), 0);
+  assert.equal(s.players[0].pieces[0], 28);
+  assert.equal(s.players[1].pieces[0], 0);
+});
+
+test("blokkert brikke hindrer bare det ene trekket, andre brikker kan flyttes", () => {
+  const s = Ludo.roll(withPieces([23, 5, -1, -1], [0, -1, -1, -1]), 3);
+  assert.deepEqual(s.legal, [1]);
+});
+
+test("egne brikker kan stå sammen på eget startfelt", () => {
+  let s = withPieces([0, -1, -1, -1], [10, -1, -1, -1]);
+  s = Ludo.move(Ludo.roll(s, 6), 1);
+  assert.deepEqual(s.players[0].pieces.slice(0, 2), [0, 0]);
+});
+
+test("brikken er bare trygg på sitt eget startfelt, ikke på andre felt", () => {
+  // Gul på relativ 1 (like etter eget startfelt) kan slås ut.
+  let s = withPieces([23, -1, -1, -1], [1, -1, -1, -1]);
+  s = Ludo.move(Ludo.roll(s, 4), 0);
+  assert.equal(s.players[1].pieces[0], -1);
+});
+
+test("motstander på ditt startfelt er ikke trygg: sette ut på sekser slår den ut", () => {
   // Gul brikke på relativ 26 = absolutt 0 = røds startfelt.
   let s = withPieces([-1, -1, -1, -1], [26, -1, -1, -1]);
   s = Ludo.move(Ludo.roll(s, 6), 0);
@@ -125,6 +160,21 @@ test("datamaskinen foretrekker å slå ut", () => {
 test("datamaskinen setter ut brikke på sekser når det ikke er noe bedre", () => {
   const s = Ludo.roll(withPieces([-1, -1, -1, -1], [10, -1, -1, -1], 1), 6);
   assert.equal(Ludo.chooseMove(s), 1);
+});
+
+test("datamaskinen kan ikke lande på din trygge brikke", () => {
+  // Gul (spiller 1): brikke 0 på rel 23 ville landet på røds startfelt (abs 0) med 3,
+  // der rød står trygt. Bare brikke 1 kan flyttes.
+  const s = Ludo.roll(withPieces([0, 56, 56, 56], [23, 40, -1, -1], 1), 3);
+  assert.deepEqual(s.legal, [1]);
+  assert.equal(Ludo.chooseMove(s), 1);
+});
+
+test("eget startfelt regnes ikke som truet", () => {
+  // Gul står 2 felt bak røds startfelt, men rød på eget startfelt er trygg.
+  const s = withPieces([0, -1, -1, -1], [24, -1, -1, -1]);
+  assert.equal(Ludo.threatened(s, 0, 0), false);
+  assert.equal(Ludo.threatened(s, 0, 1), true);
 });
 
 test("et helt spill mellom to datamaskiner blir ferdig", () => {

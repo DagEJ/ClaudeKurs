@@ -67,6 +67,10 @@ Valgene som gjelder for ludo-spillet i dette repoet:
 
 - **To spillere:** du (rød) mot datamaskinen (gul), på hver sin side av brettet.
 - **Fire brikker** hver.
-- **Kun grunnreglene.** Ingen husregler eller varianter: ingen tårn, ingen grense på tre seksere, ingen sikre felt (heller ikke startfeltene).
+- **Grunnreglene** pluss ett trygt felt (se under). Ellers ingen husregler eller varianter: ingen tårn, ingen grense på tre seksere, ingen andre sikre felt.
+- **Eget startfelt er trygt:** en brikke som står på sitt eget startfelt (feltet brikkene settes ut på), kan ikke slås ut.
+  - Motstandere kan **ikke lande** på feltet mens en trygg brikke står der, men de kan **hoppe over** det. Et kast som ville endt der, kan ikke brukes på den brikken.
+  - Startfeltet er bare trygt for eieren: står en motstander på *ditt* startfelt (uten at du har en brikke der), blir den slått ut når du setter ut en brikke.
+  - Egne brikker kan stå sammen på startfeltet.
 - **For høyt kast i innløpet:** brikken kan ikke flyttes med det kastet (alternativ b).
 - **Hvem begynner:** begge kaster, og den med høyest kast begynner (nytt kast ved likt).

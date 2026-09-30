@@ -49,6 +49,11 @@ const Ludo = {
     return (player.start + pos) % Ludo.TRACK_LENGTH;
   },
 
+  // En brikke på sitt eget startfelt (posisjon 0) kan ikke slås ut.
+  isSafe(pos) {
+    return pos === 0;
+  },
+
   // Ny posisjon etter kastet, eller null hvis brikken ikke kan flyttes.
   target(pos, roll) {
     if (pos === Ludo.YARD) return roll === 6 ? 0 : null;
@@ -57,11 +62,23 @@ const Ludo = {
     return next <= Ludo.GOAL ? next : null; // må treffe mål nøyaktig
   },
 
+  // Står det en trygg motstanderbrikke på feltet spilleren vil lande på?
+  // Da kan spilleren ikke lande der (men kan hoppe over).
+  blocked(state, playerIdx, to) {
+    const sq = Ludo.square(state.players[playerIdx], to);
+    if (sq === null) return false;
+    return state.players.some(
+      (p, pi) => pi !== playerIdx && p.pieces.some((pos) => Ludo.isSafe(pos) && Ludo.square(p, pos) === sq)
+    );
+  },
+
   legalMoves(state, roll = state.dice) {
-    const player = state.players[state.current];
+    const me = state.current;
+    const player = state.players[me];
     const moves = [];
     player.pieces.forEach((pos, i) => {
-      if (Ludo.target(pos, roll) !== null) moves.push(i);
+      const to = Ludo.target(pos, roll);
+      if (to !== null && !Ludo.blocked(state, me, to)) moves.push(i);
     });
     return moves;
   },
@@ -111,12 +128,13 @@ const Ludo = {
     players[me].pieces[piece] = to;
 
     // Slå ut motstandere som står nøyaktig på feltet vi lander på.
+    // (Trygge brikker kan ikke stå her – slike trekk er ikke lovlige.)
     const sq = Ludo.square(players[me], to);
     if (sq !== null) {
       players.forEach((p, pi) => {
         if (pi === me) return;
         p.pieces.forEach((pos, k) => {
-          if (Ludo.square(p, pos) === sq) {
+          if (!Ludo.isSafe(pos) && Ludo.square(p, pos) === sq) {
             p.pieces[k] = Ludo.YARD;
             events.push({ type: "capture", player: me, victim: pi, piece: k });
           }
@@ -135,6 +153,7 @@ const Ludo = {
 
   // Kan en motstander av playerIdx lande på absolutt felt sq med neste kast?
   threatened(state, playerIdx, sq) {
+    if (sq === state.players[playerIdx].start) return false; // eget startfelt er trygt
     return state.players.some((opp, oi) => {
       if (oi === playerIdx) return false;
       if (sq === opp.start && opp.pieces.includes(Ludo.YARD)) return true;
@@ -165,7 +184,8 @@ const Ludo = {
       if (to === Ludo.GOAL) score += 100;
       if (toSq !== null) {
         const captures = state.players.some(
-          (p, pi) => pi !== me && p.pieces.some((pos) => Ludo.square(p, pos) === toSq)
+          (p, pi) =>
+            pi !== me && p.pieces.some((pos) => !Ludo.isSafe(pos) && Ludo.square(p, pos) === toSq)
         );
         if (captures) score += 80;
       }
