@@ -65,6 +65,8 @@ kjører alle `logic.test.js`. Alle tester skal passere før en endring commites.
 (Ikke bruk `node --test games/` – en mappe som argument virker ikke i Node 22.)
 En god test å ha med: simuler et helt spill med fast frø for tilfeldighet og sjekk at det blir ferdig.
 Åpne også spillet i nettleseren og spill en runde: sjekk at det ikke er feil i konsollen.
+Automatisk variant: `node .claude/skills/nytt-minispill/scripts/sjekk-i-nettleser.js <id>` (krever Playwright).
+Skillet `nytt-minispill` i `.claude/skills/` beskriver hele arbeidsflyten for et nytt spill.
 
 ## Publisering
 
