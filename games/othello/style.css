@@ -1,0 +1,146 @@
+/* Stil som bare gjelder Othello. Farger fra shared/style.css. */
+
+.narrow { max-width: 560px; }
+
+/* Nivåvelger */
+.levels {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 12px;
+  width: fit-content;
+  max-width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.level {
+  font: inherit;
+  font-weight: 600;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+.level[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); }
+.level:focus-visible { outline: 3px solid var(--text); outline-offset: 1px; }
+
+/* Brikketelling */
+.score { display: flex; gap: 8px; margin-bottom: 12px; }
+.side {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--muted);
+}
+.side strong { margin-left: auto; font-family: var(--mono); font-size: 1.15rem; color: var(--text); }
+.side.turn { border-color: var(--accent); color: var(--text); }
+.side .disc {
+  flex: none;
+  width: 1.1em;
+  height: 1.1em;
+  border-radius: 50%;
+  border: 1px solid var(--muted);
+}
+.disc.dark { background: var(--disc-dark); }
+.disc.light { background: var(--disc-light); }
+
+/* Brett */
+.board.oboard { padding: 12px; min-height: 0; }
+
+.ogrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 3px;
+  padding: 3px;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--p-green) 55%, var(--disc-dark));
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.cell {
+  aspect-ratio: 1;
+  min-width: 0;
+  padding: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  background: var(--p-green);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.cell:disabled { cursor: default; }
+.cell:focus { outline: none; }
+
+/* Brikke */
+.cell::before {
+  content: "";
+  width: 78%;
+  height: 78%;
+  border-radius: 50%;
+  display: none;
+}
+.cell.p0::before, .cell.p1::before {
+  display: block;
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--disc-dark) 45%, transparent);
+}
+.cell.p0::before { background: var(--disc-dark); }
+.cell.p1::before { background: var(--disc-light); }
+
+/* Lovlig trekk: prikk i din farge */
+.cell.hint::before {
+  display: block;
+  width: 26%;
+  height: 26%;
+  background: var(--disc-dark);
+  opacity: 0.45;
+}
+.cell.hint:hover::before { width: 78%; height: 78%; opacity: 0.4; }
+
+/* Siste trekk: liten markering midt på brikken */
+.cell.last::after {
+  content: "";
+  position: absolute;
+  width: 16%;
+  height: 16%;
+  border-radius: 50%;
+  background: var(--p-red);
+}
+
+.cell.placed::before { animation: placed 180ms ease-out; }
+.cell.flipped::before { animation: flipped 320ms ease-in-out; }
+@keyframes placed { from { transform: scale(0.4); } }
+@keyframes flipped {
+  from { transform: scaleX(1); filter: invert(1); }
+  49% { transform: scaleX(0.05); filter: invert(1); }
+  50% { transform: scaleX(0.05); filter: none; }
+  to { transform: scaleX(1); filter: none; }
+}
+
+/* Markør for tastaturet */
+.ogrid.keys .cell.sel { outline: 3px solid var(--accent); outline-offset: -3px; z-index: 1; }
+.cell:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; z-index: 1; }
+
+.ogrid.thinking { cursor: progress; }
+
+/* Melding om at noen må stå over */
+.message.pass { font-weight: 700; color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cell.placed::before, .cell.flipped::before { animation: none; }
+}

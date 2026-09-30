@@ -6,6 +6,8 @@
 //   description: "Spis eplene uten å krasje i deg selv." },
 
 window.GAMES = [
+  { id: "othello", title: "Othello", emoji: "⚫", minutes: 4,
+    description: "Fang og snu datamaskinens brikker på et 6×6-brett. Tre nivåer – hvor lang seiersrekke klarer du?" },
   { id: "minesveiper", title: "Minesveiper", emoji: "💣", minutes: 3,
     description: "Rydd brettet uten å treffe en mine. Første klikk er alltid trygt – tre nivåer, raskeste tid teller." },
   { id: "fire-pa-rad", title: "Fire på rad", emoji: "🔴", minutes: 3,
