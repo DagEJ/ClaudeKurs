@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yatzy – Minispill</title>
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container narrow">
+    <a class="back" href="../../index.html">← Alle spill</a>
+
+    <div class="game-header">
+      <h1>Yatzy</h1>
+      <div class="stats">
+        <div><span>Runde</span> <strong id="round">1/15</strong></div>
+        <div><span>Poeng</span> <strong id="score">0</strong></div>
+        <div><span>Rekord</span> <strong id="best">–</strong></div>
+      </div>
+    </div>
+
+    <div id="board" class="board yboard">
+      <div id="dice" class="dice-row" role="group" aria-label="Terninger"></div>
+      <button id="roll" class="btn primary roll">Kast</button>
+      <div id="sheet" class="sheet" role="group" aria-label="Skjema">
+        <div id="upper" class="col"></div>
+        <div id="lower" class="col"></div>
+      </div>
+    </div>
+
+    <p id="message" class="message" aria-live="polite"></p>
+
+    <div class="controls">
+      <button id="new" class="btn">Nytt spill</button>
+    </div>
+
+    <p class="help">
+      Trykk på en terning for å holde den, og på et felt for å skrive inn. Mellomrom kaster, 1–5 holder, piler og Enter velger felt.
+      <a href="REGLER.md">Regler</a>
+    </p>
+  </main>
+
+  <script src="../../shared/common.js"></script>
+  <script src="logic.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

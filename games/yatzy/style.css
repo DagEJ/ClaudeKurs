@@ -1,0 +1,128 @@
+/* Stil som bare gjelder Yatzy. Farger fra shared/style.css. */
+
+.narrow { max-width: 560px; }
+
+.board.yboard {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  padding: 14px;
+  min-height: 0;
+}
+
+/* ---------- Terninger ---------- */
+
+.dice-row {
+  display: flex;
+  justify-content: center;
+  gap: clamp(6px, 2.5vw, 12px);
+  padding-bottom: 16px; /* plass til «holdt»-merket */
+}
+
+.die {
+  position: relative;
+  --d: clamp(46px, 14vw, 58px);
+  width: var(--d);
+  height: var(--d);
+  flex: none;
+  padding: calc(var(--d) * 0.13); /* prosent ville regnet av raden, ikke terningen */
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  gap: calc(var(--d) * 0.04);
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s ease;
+}
+.die span { border-radius: 50%; }
+.die span.on { background: var(--text); }
+.die:disabled { cursor: default; }
+.die.blank { opacity: 0.45; }
+
+.die.held {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+  transform: translateY(4px);
+}
+.die.held::after {
+  content: "holdt";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  margin-top: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.die:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
+
+.die.rolling { animation: die-shake 0.25s; }
+@keyframes die-shake {
+  25% { transform: rotate(-14deg); }
+  75% { transform: rotate(14deg); }
+}
+
+.roll { align-self: center; min-width: 200px; }
+
+/* ---------- Skjema ---------- */
+
+.sheet {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: start;
+}
+.col { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-height: 34px;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.92rem;
+  text-align: left;
+  white-space: nowrap;
+}
+.row .pts { font-family: var(--mono); font-weight: 700; }
+
+/* Ledig felt som kan velges: viser hva det ville gitt */
+button.row { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+button.row:not(:disabled) { background: var(--surface); border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+button.row:not(:disabled):hover { border-color: var(--accent); }
+button.row:not(:disabled) .pts { color: var(--accent); }
+button.row:not(:disabled).zero .pts { color: var(--muted); font-weight: 400; }
+button.row:focus-visible { outline: 3px solid var(--text); outline-offset: 1px; }
+
+button.row:disabled { cursor: default; }
+/* Ledig, men ikke kastet ennå */
+button.row.open:disabled { background: var(--surface); border-style: dashed; color: var(--muted); }
+/* Fylt felt */
+button.row.filled { border-color: transparent; }
+button.row.filled.zero .pts { color: var(--muted); }
+
+.row.sum { border-color: transparent; background: none; color: var(--muted); }
+.row.sum .pts { color: var(--text); }
+.row.sum.good .pts { color: var(--good); }
+.row.total { border-top: 1px solid var(--border); border-radius: 0; font-weight: 700; color: var(--text); }
+
+@media (max-width: 420px) {
+  .board.yboard { padding: 10px; }
+  .sheet { gap: 6px; }
+  .row { padding: 4px 8px; font-size: 0.86rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .die { transition: none; }
+  .die.rolling { animation: none; }
+}

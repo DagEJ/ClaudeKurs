@@ -6,6 +6,8 @@
 //   description: "Spis eplene uten å krasje i deg selv." },
 
 window.GAMES = [
+  { id: "yatzy", title: "Yatzy", emoji: "🎯", minutes: 5,
+    description: "Fem terninger, tre kast og 15 felt. Hold de beste og jakt på høyest mulig poengsum." },
   { id: "minesveiper", title: "Minesveiper", emoji: "💣", minutes: 3,
     description: "Rydd brettet uten å treffe en mine. Første klikk er alltid trygt – tre nivåer, raskeste tid teller." },
   { id: "fire-pa-rad", title: "Fire på rad", emoji: "🔴", minutes: 3,
