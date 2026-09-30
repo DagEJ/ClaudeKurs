@@ -6,6 +6,12 @@
 //   description: "Spis eplene uten å krasje i deg selv." },
 
 window.GAMES = [
+  { id: "breakout", title: "Breakout", emoji: "🧱", minutes: 3,
+    description: "Knus alle klossene med ballen. Tre liv, og hvert nytt brett går fortere – hvor mange poeng klarer du?" },
+  { id: "snake", title: "Snake", emoji: "🐍", minutes: 3,
+    description: "Spis eplene og bli lang uten å krasje i kanten eller i deg selv. Farten øker for hvert eple." },
+  { id: "asteroider", title: "Asteroider", emoji: "☄️", minutes: 3,
+    description: "Snu skipet og skyt asteroidene før de treffer deg. Store deler seg, små gir flest poeng – bølgene blir stadig raskere." },
   { id: "poengblokk", title: "Poengblokk", emoji: "📝",
     description: "Før poeng for kortspill, minigolf, dart og annet. Maler, nedtelling fra 501 og automatisk sum og vinner." },
   { id: "slagskip", title: "Slagskip", emoji: "🚢", minutes: 4,
