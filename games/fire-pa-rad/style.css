@@ -1,0 +1,114 @@
+/* Stil som bare gjelder Fire på rad. Farger fra shared/style.css. */
+
+.narrow { max-width: 560px; }
+
+.red    { --c: var(--p-red); }
+.yellow { --c: var(--p-yellow); }
+
+.sub { margin: 2px 0 0; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+.dot { display: inline-block; width: 0.8em; height: 0.8em; border-radius: 50%; background: var(--c); }
+
+/* Nivåvelger */
+.levels {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 12px;
+  width: fit-content;
+  max-width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.level {
+  font: inherit;
+  font-weight: 600;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+.level[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); }
+.level:focus-visible { outline: 3px solid var(--text); outline-offset: 1px; }
+
+/* Brett */
+.board.c4board { padding: 12px; min-height: 0; }
+
+.c4 {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+  max-width: 460px;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+  min-width: 0;
+}
+.col:disabled { cursor: default; }
+.col:focus-visible { outline: none; }
+
+/* Forhåndsvisning over kolonnen: viser hvor brikken slippes */
+.preview {
+  aspect-ratio: 1;
+  margin: 12%;
+  border-radius: 50%;
+  background: var(--p-red);
+  opacity: 0;
+  transition: opacity 0.12s;
+}
+.c4.your-turn .col:hover .preview,
+.c4.your-turn .col.sel .preview { opacity: 0.55; }
+.c4.your-turn .col:focus-visible .preview { opacity: 0.8; box-shadow: 0 0 0 3px var(--text); }
+
+.holes {
+  display: flex;
+  flex-direction: column-reverse; /* rad 0 nederst */
+  background: var(--p-blue);
+  padding: 6% 3%; /* lik for alle kolonner, så hullene blir like store */
+}
+.col:first-child .holes { border-radius: 12px 0 0 12px; }
+.col:last-child .holes  { border-radius: 0 12px 12px 0; }
+.c4.your-turn .col:hover .holes,
+.c4.your-turn .col.sel .holes { background: color-mix(in oklab, var(--p-blue) 88%, var(--surface)); }
+
+.slot {
+  aspect-ratio: 1;
+  margin: 9%;
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: inset 0 2px 4px color-mix(in srgb, var(--text) 25%, transparent);
+  position: relative;
+}
+.slot.p0, .slot.p1 { background: var(--c); box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--text) 20%, transparent); }
+.slot.p0 { --c: var(--p-red); }
+.slot.p1 { --c: var(--p-yellow); }
+
+.slot.drop { animation: drop calc(90ms + var(--fall) * 45ms) cubic-bezier(0.5, 0, 1, 1); }
+@keyframes drop { from { transform: translateY(calc(var(--fall) * -120%)); } }
+
+.slot.last::after {
+  content: "";
+  position: absolute;
+  inset: 32%;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--on-player) 80%, transparent);
+}
+.slot.win { animation: win 0.6s ease-in-out infinite alternate; box-shadow: 0 0 0 3px var(--text); }
+@keyframes win { to { transform: scale(0.84); } }
+
+.c4.thinking { cursor: progress; }
+
+@media (prefers-reduced-motion: reduce) {
+  .slot.drop, .slot.win { animation: none; }
+}

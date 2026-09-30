@@ -41,7 +41,9 @@ Lag en oppgaveliste med de fem stegene, så brukeren ser hvor langt du har komme
    - For motstanderen: at den tar en vinnende stilling og blokkerer en tapende.
 4. Kjør `node --test` til alt er grønt **før** du går videre. Feil i logikken er mye vanskeligere å finne når det ligger tegning og animasjon oppå.
 
-Felle vi har gått i: etter et kast eller trekk kan turen ha gått over til neste spiller. Sjekk tilstanden til riktig spiller i testene.
+Feller vi har gått i:
+- Etter et kast eller trekk kan turen ha gått over til neste spiller. Sjekk tilstanden til riktig spiller i testene.
+- Når du bygger en stilling for å teste motstanderen («den skal ikke spille her»), sjekk at stillingen ikke har et *annet* vinnende trekk du ikke tenkte på. Feiler testen, se først på stillingen, så på motstanderen.
 
 ## 3. Side, tegning og intro
 
@@ -65,7 +67,7 @@ Skriptet åpner spillet på PC (lys) og mobil (mørk), sjekker introkortet og at
 
 Etterpå:
 
-1. Se på skjermbildene med Read, minst `mobil-mork-intro.png` og `pc-lys-underveis.png`. Se etter overlapp, tekst som er kuttet, dårlig kontrast i mørk modus og kort som dekker for mye.
+1. Se på skjermbildene med Read, minst `mobil-mork-intro.png` og `pc-lys-underveis.png`. Skriptet måler bare om introkortet får plass. Du må selv se etter ujevne rutenett, overlapp, tekst som er kuttet, knapper som bryter over flere linjer, dårlig kontrast i mørk modus og kort som dekker for mye. I Fire på rad var for eksempel ytterkolonnene kortere enn de andre, og det så bare skjermbildet.
 2. Rett funn og kjør på nytt.
 3. Skriptet spiller tilfeldig, så det finner krasj og layoutfeil, men ikke om en bestemt flyt virker. Har spillet en egen flyt (tiden er ute → fortsett, datamaskinen vinner → nytt spill), skriv en kort, målrettet Playwright-sjekk for den i en midlertidig mappe. Bruk `page.clock.install()` og `page.clock.runFor(ms)` for å spole tid, og `click({ force: true })` på elementer som animeres (ellers venter Playwright på at de står stille).
 

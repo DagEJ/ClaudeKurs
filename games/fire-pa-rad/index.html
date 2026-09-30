@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fire på rad – Minispill</title>
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container narrow">
+    <a class="back" href="../../index.html">← Alle spill</a>
+
+    <div class="game-header">
+      <div>
+        <h1>Fire på rad</h1>
+        <p class="sub"><span class="dot red"></span> Du &nbsp; mot &nbsp; <span class="dot yellow"></span> Datamaskinen</p>
+      </div>
+      <div class="stats">
+        <div><span>Rekke</span> <strong id="streak">0</strong></div>
+        <div><span>Rekord</span> <strong id="best">0</strong></div>
+      </div>
+    </div>
+
+    <div class="levels" role="group" aria-label="Nivå">
+      <button class="level" data-level="lett" aria-pressed="false">Lett</button>
+      <button class="level" data-level="middels" aria-pressed="true">Middels</button>
+      <button class="level" data-level="vanskelig" aria-pressed="false">Vanskelig</button>
+    </div>
+
+    <div id="board" class="board c4board">
+      <div id="grid" class="c4" aria-label="Brett, 7 kolonner"></div>
+    </div>
+
+    <p id="message" class="message" aria-live="polite"></p>
+
+    <div class="controls">
+      <button id="new" class="btn primary">Nytt parti</button>
+    </div>
+
+    <p class="help">
+      ← → og Enter, tallene 1–7, eller trykk på en kolonne.
+      <a href="REGLER.md">Regler</a>
+    </p>
+  </main>
+
+  <script src="../../shared/common.js"></script>
+  <script src="logic.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

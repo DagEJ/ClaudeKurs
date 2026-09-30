@@ -6,6 +6,8 @@
 //   description: "Spis eplene uten å krasje i deg selv." },
 
 window.GAMES = [
+  { id: "fire-pa-rad", title: "Fire på rad", emoji: "🔴", minutes: 3,
+    description: "Få fire på rad før datamaskinen. Tre nivåer – hvor lang seiersrekke klarer du?" },
   { id: "2048", title: "2048", emoji: "🔢", minutes: 2,
     description: "Slå sammen like tall på to minutter. Når tiden er ute, kan du spille videre." },
   { id: "ludo", title: "Ludo", emoji: "🎲", minutes: 15,

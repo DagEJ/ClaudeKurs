@@ -25,12 +25,10 @@ Hvert spill har disse filene:
 | `logic.test.js` | Tester for `logic.js` med Node sin innebygde testløper. |
 | `REGLER.md` | *Valgfri.* Spillets regler, med en egen del «Vår versjon» for valgene vi har tatt. Er den der, er det den som gjelder – hold den og koden i takt. |
 
-Eksisterende spill: `ludo` (du mot datamaskinen). Se `games/registry.js` for full liste.
+Eksisterende spill: `ludo` (mot datamaskinen), `2048` (tidsangrep, kan fortsette fritt), `fire-pa-rad` (mot datamaskinen, minimax, tre nivåer). Se `games/registry.js` for full liste.
 
-Planlagte spill, i denne rekkefølgen (valgt 2026-09-30):
-1. **2048** – øver på sveip/touch og piltaster.
-2. **Fire på rad** – mot datamaskinen, med en motstander som tenker fremover (minimax) og vanskelighetsgrader.
-3. **Minesveiper** – genererte brett der første klikk alltid er trygt; flagg med langt trykk på touch.
+Planlagte spill (valgt 2026-09-30):
+1. **Minesveiper** – genererte brett der første klikk alltid er trygt; flagg med langt trykk på touch.
 
 ## Legge til et nytt spill
 

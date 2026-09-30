@@ -202,6 +202,8 @@ h1 { font-size: 2rem; margin: 0 0 4px; letter-spacing: -0.02em; }
 @media (max-width: 480px) {
   .overlay-card { padding: 16px; gap: 10px; font-size: 0.92rem; }
   .overlay-card h2 { font-size: 1.1rem; }
+  .overlay-card .controls { gap: 8px; }
+  .overlay-card .btn { padding: 8px 14px; }
 }
 
 kbd {
