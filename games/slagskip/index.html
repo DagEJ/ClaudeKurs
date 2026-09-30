@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slagskip – Minispill</title>
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container narrow">
+    <a class="back" href="../../index.html">← Alle spill</a>
+
+    <div class="game-header">
+      <h1>Slagskip</h1>
+      <div class="stats">
+        <div><span>Rekke</span> <strong id="streak">0</strong></div>
+        <div><span>Rekord</span> <strong id="best">0</strong></div>
+      </div>
+    </div>
+
+    <div class="levels" role="group" aria-label="Nivå">
+      <button class="level" data-level="lett" aria-pressed="false">Lett</button>
+      <button class="level" data-level="middels" aria-pressed="true">Middels</button>
+      <button class="level" data-level="vanskelig" aria-pressed="false">Vanskelig</button>
+    </div>
+
+    <div class="score" aria-label="Skip igjen">
+      <div id="side0" class="side">Du <strong id="count0">4</strong> skip</div>
+      <div id="side1" class="side">Datamaskinen <strong id="count1">4</strong> skip</div>
+    </div>
+
+    <div id="board" class="board bsboard placing">
+      <div class="sea">
+        <p id="caption" class="caption">Din flåte</p>
+        <div id="grid" class="bgrid" role="group" aria-label="Brett, 8 ganger 8 ruter"></div>
+      </div>
+
+      <div class="sea own">
+        <p class="caption">Din flåte</p>
+        <div id="mini" class="bgrid mini" aria-hidden="true"></div>
+      </div>
+
+      <div class="dock">
+        <div id="ships" class="ships" role="group" aria-label="Velg skip"></div>
+        <div class="dock-buttons">
+          <button id="rotate" class="btn">Roter</button>
+          <button id="random" class="btn">Tilfeldig</button>
+          <button id="start" class="btn primary" disabled>Start kampen</button>
+        </div>
+      </div>
+    </div>
+
+    <p id="message" class="message" aria-live="polite"></p>
+
+    <div class="controls">
+      <button id="new" class="btn">Nytt spill</button>
+    </div>
+
+    <p class="help">
+      Trykk for å legge skip og skyte. Piler, Enter og R på tastaturet.
+      <a href="REGLER.md">Regler</a>
+    </p>
+  </main>
+
+  <script src="../../shared/common.js"></script>
+  <script src="logic.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

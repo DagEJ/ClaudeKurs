@@ -1,0 +1,154 @@
+/* Stil som bare gjelder Slagskip. Farger fra shared/style.css. */
+
+.narrow { max-width: 560px; }
+
+/* Nivåvelger */
+.levels {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 12px;
+  width: fit-content;
+  max-width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.level {
+  font: inherit;
+  font-weight: 600;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+.level[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); }
+.level:focus-visible { outline: 3px solid var(--text); outline-offset: 1px; }
+
+/* Skip igjen, og hvem som har turen */
+.score { display: flex; gap: 8px; margin-bottom: 12px; }
+.side {
+  flex: 1;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-align: center;
+  white-space: nowrap;
+}
+.side strong { color: var(--text); font-family: var(--mono); }
+.side.turn { border-color: var(--accent); color: var(--text); box-shadow: inset 0 0 0 1px var(--accent); }
+
+/* Spillflaten: stort brett, og under plassering en «kai» med skipene */
+.board.bsboard {
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px 16px;
+  padding: 12px;
+  min-height: 0;
+}
+.sea { flex: 1 1 250px; max-width: 340px; min-width: 0; }
+.sea.own { flex: 0 1 150px; }
+.caption {
+  margin: 0 0 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+}
+.placing .own, .battle .dock { display: none; }
+
+.bgrid {
+  --water: color-mix(in srgb, var(--p-blue) 20%, var(--surface));
+  --hull: color-mix(in srgb, var(--text) 62%, var(--surface));
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 3px;
+  width: 100%;
+  container-type: inline-size;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+.bgrid.mini { gap: 2px; }
+
+.cell {
+  aspect-ratio: 1;
+  min-width: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 5px;
+  background: var(--water);
+  color: var(--text);
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: calc(100cqw / 8 * 0.5);
+  line-height: 1;
+  -webkit-tap-highlight-color: transparent;
+}
+.mini .cell { border-radius: 3px; }
+button.cell { cursor: pointer; }
+button.cell:disabled { cursor: default; }
+.bgrid.live button.cell:not(:disabled):hover { background: color-mix(in srgb, var(--p-blue) 42%, var(--surface)); }
+.cell:focus { outline: none; }
+
+/* Egne skip, og datamaskinens skip som ikke ble funnet */
+.cell.ship { background: var(--hull); }
+.cell.reveal { background: color-mix(in srgb, var(--hull) 45%, var(--water)); }
+
+/* Forhåndsvisning av skipet som skal legges */
+.cell.pre { background: color-mix(in srgb, var(--accent) 65%, var(--surface)); }
+.cell.pre.bad { background: color-mix(in srgb, var(--bad) 55%, var(--surface)); }
+
+/* Skudd */
+.cell.miss::after {
+  content: "";
+  width: 24%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--muted);
+}
+.cell.hit { background: color-mix(in srgb, var(--bad) 60%, var(--surface)); }
+.cell.hit::after, .cell.sunk::after { content: "✕"; }
+.cell.sunk { background: var(--text); color: var(--bad); }
+.cell.last { box-shadow: inset 0 0 0 2px var(--accent); }
+.cell.shot { animation: shot 180ms ease-out; }
+@keyframes shot { from { transform: scale(0.6); } }
+
+/* Markør for tastaturet */
+.bgrid.keys .cell.sel { outline: 3px solid var(--accent); outline-offset: -1px; z-index: 1; }
+
+/* Kai: skipene som skal plasseres, og knappene */
+.dock { flex: 1 1 100%; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.ships { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.shipbtn {
+  display: flex;
+  gap: 2px;
+  padding: 6px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  cursor: pointer;
+}
+.shipbtn .seg { width: 15px; height: 15px; border-radius: 3px; background: color-mix(in srgb, var(--text) 62%, var(--surface)); }
+.shipbtn.placed { opacity: 0.4; }
+.shipbtn[aria-pressed="true"] { border-color: var(--accent); opacity: 1; }
+.shipbtn[aria-pressed="true"] .seg { background: var(--accent); }
+.shipbtn:focus-visible { outline: 3px solid var(--text); outline-offset: 1px; }
+.dock-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.dock-buttons .btn { padding: 8px 14px; }
+
+@media (max-width: 480px) {
+  .side { padding: 6px 8px; font-size: 0.88rem; }
+  .dock-buttons .btn { padding: 8px 12px; font-size: 0.95rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cell.shot { animation: none; }
+}

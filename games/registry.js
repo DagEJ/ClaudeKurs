@@ -6,6 +6,8 @@
 //   description: "Spis eplene uten å krasje i deg selv." },
 
 window.GAMES = [
+  { id: "slagskip", title: "Slagskip", emoji: "🚢", minutes: 4,
+    description: "Legg ut flåten din og senk datamaskinens skip før den senker dine. Treff gir nytt skudd – tre nivåer." },
   { id: "othello", title: "Othello", emoji: "⚫", minutes: 4,
     description: "Fang og snu datamaskinens brikker på et 6×6-brett. Tre nivåer – hvor lang seiersrekke klarer du?" },
   { id: "yatzy", title: "Yatzy", emoji: "🎯", minutes: 5,
