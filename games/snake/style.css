@@ -1,0 +1,42 @@
+/* Stil som bare gjelder Snake. Fargene på brettet leses fra shared/style.css i game.js. */
+
+.narrow { max-width: 520px; }
+
+.game-header { align-items: flex-end; }
+.mode { margin: 2px 0 0; color: var(--muted); font-size: 0.95rem; }
+
+.scores { display: flex; gap: 8px; }
+.score {
+  min-width: 84px;
+  padding: 6px 12px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.score span {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.score strong {
+  font-family: var(--mono);
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Brettet: kvadratisk canvas som fyller bredden. Sveip skal ikke rulle siden. */
+.board.board-snake {
+  padding: 8px;
+  min-height: 0;
+  touch-action: none;
+  overscroll-behavior: contain;
+}
+.board-snake canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  touch-action: none;
+}
