@@ -23,6 +23,9 @@ Hvert spill har nøyaktig disse filene:
 | `game.js` | Tegning, input og spill-løkke. Kaller funksjoner i `logic.js`. |
 | `style.css` | Kun det som er spesifikt for dette spillet. |
 | `logic.test.js` | Tester for `logic.js` med Node sin innebygde testløper. |
+| `REGLER.md` | *Valgfri.* Spillets regler, med en egen del «Vår versjon» for valgene vi har tatt. Er den der, er det den som gjelder – hold den og koden i takt. |
+
+Eksisterende spill: `ludo` (du mot datamaskinen). Se `games/registry.js` for full liste.
 
 ## Legge til et nytt spill
 
@@ -38,6 +41,8 @@ Hvert spill har nøyaktig disse filene:
   `if (typeof module !== "undefined") module.exports = X;` slik at Node-testene kan laste den.
 - Logikken er ren: den tar inn tilstand (og evt. tidssteg eller tilfeldig tall) og returnerer ny tilstand. Tid og tilfeldighet sendes inn fra `game.js`, slik at logikken kan testes.
 - Bruk fargene og klassene i `shared/style.css` (CSS-variabler som `--accent`). Ikke hardkod farger i spillene.
+  Spillerfarger finnes som `--p-red`, `--p-green`, `--p-yellow`, `--p-blue` og `--on-player` (tekst på brikker). Trengs nye farger, legg dem i `shared/style.css` for både lys og mørk modus.
+- Motstander styrt av datamaskinen: la trekkvalget være en ren funksjon i `logic.js` (f.eks. `chooseMove(state)`) så den kan testes.
 - Spill skal kunne spilles med både mus/touch og tastatur der det gir mening, og fungere på mobilbredde.
 - Et spill skal ta **noen få minutter**. Hold det lite.
 - Tekst i brukergrensesnittet er på norsk.
@@ -50,6 +55,8 @@ node --test
 ```
 
 kjører alle `logic.test.js`. Alle tester skal passere før en endring commites.
+(Ikke bruk `node --test games/` – en mappe som argument virker ikke i Node 22.)
+En god test å ha med: simuler et helt spill med fast frø for tilfeldighet og sjekk at det blir ferdig.
 Åpne også spillet i nettleseren og spill en runde: sjekk at det ikke er feil i konsollen.
 
 ## Publisering
