@@ -49,6 +49,8 @@ Planlagte spill, i denne rekkefølgen (valgt 2026-09-30):
   Spillerfarger finnes som `--p-red`, `--p-green`, `--p-yellow`, `--p-blue` og `--on-player` (tekst på brikker). Trengs nye farger, legg dem i `shared/style.css` for både lys og mørk modus.
 - Motstander styrt av datamaskinen: la trekkvalget være en ren funksjon i `logic.js` (f.eks. `chooseMove(state)`) så den kan testes.
 - Spill skal kunne spilles med både mus/touch og tastatur der det gir mening, og fungere på mobilbredde.
+- **Før spillet starter** vises et kort intro-kort over spillflaten som forklarer hvordan spillet styres, både med taster og med touch. Bruk `Common.showOverlay(board, { title: "Slik spiller du", text, howto: [{ keys, text }], buttons })`. Taster skal ikke styre spillet mens kortet er oppe (`Common.isOverlayOpen(board)`).
+- Slutt- og valgskjermer (tiden er ute, du vant, osv.) bruker også `Common.showOverlay`.
 - Et spill skal ta **noen få minutter**. Hold det lite.
 - Tekst i brukergrensesnittet er på norsk.
 - Rekorder lagres med `Common.getBest` / `Common.saveBest` (tåler at localStorage mangler).

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2048 – Minispill</title>
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container narrow">
+    <a class="back" href="../../index.html">← Alle spill</a>
+
+    <div class="game-header">
+      <div>
+        <h1>2048</h1>
+        <p id="mode" class="mode">Tidsangrep · 2 minutter</p>
+      </div>
+      <div class="scores">
+        <div class="score"><span>Poeng</span><strong id="score">0</strong></div>
+        <div class="score"><span>Rekord</span><strong id="best">–</strong></div>
+      </div>
+    </div>
+
+    <div class="clock" id="clock">
+      <div class="clock-bar"><div id="clock-fill" class="clock-fill"></div></div>
+      <strong id="time" class="clock-time">2:00</strong>
+    </div>
+
+    <div id="board" class="board board2048">
+      <div id="grid" class="g2048" aria-label="Brett">
+        <div class="cells"></div>
+        <div id="tiles" class="tiles"></div>
+      </div>
+    </div>
+
+    <p id="message" class="message"></p>
+
+    <div class="controls">
+      <button id="undo" class="btn">Angre <span id="undos" class="badge">3</span></button>
+      <button id="new" class="btn primary">Nytt spill</button>
+    </div>
+
+    <p class="help">
+      Piltaster eller WASD · sveip på brettet · U angrer.
+      <a href="REGLER.md">Regler</a>
+    </p>
+  </main>
+
+  <script src="../../shared/common.js"></script>
+  <script src="logic.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

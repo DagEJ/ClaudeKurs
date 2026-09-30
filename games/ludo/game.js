@@ -230,7 +230,7 @@
   }
 
   function humanMove(piece) {
-    if (!humanCanMove() || !state.legal.includes(piece)) return;
+    if (!state || !humanCanMove() || !state.legal.includes(piece)) return;
     doMove(piece);
   }
 
@@ -263,6 +263,7 @@
   }
 
   function newGame() {
+    Common.hideOverlay(boardWrap);
     token++;
     waiting = false;
     let a, b;
@@ -279,11 +280,12 @@
   // ---------- Input ----------
 
   el.roll.addEventListener("click", () => {
-    if (!waiting && state.current === HUMAN && state.phase === "roll") doRoll();
+    if (state && !waiting && state.current === HUMAN && state.phase === "roll") doRoll();
   });
   el.newGame.addEventListener("click", newGame);
 
   document.addEventListener("keydown", (e) => {
+    if (Common.isOverlayOpen(boardWrap)) return;
     if (e.code === "Space" && e.target.tagName !== "BUTTON") {
       e.preventDefault();
       if (!el.roll.disabled) doRoll();
@@ -292,6 +294,19 @@
     }
   });
 
+  // ---------- Start ----------
+
+  const boardWrap = document.querySelector(".ludo-wrap");
   buildBoard();
-  newGame();
+  el.roll.disabled = true;
+  Common.showOverlay(boardWrap, {
+    title: "Slik spiller du",
+    text: "Du er rød. Få alle fire brikkene i mål før datamaskinen. En sekser setter ut en brikke.",
+    howto: [
+      { keys: ["Mellomrom"], text: "Kast terningen" },
+      { keys: ["1", "2", "3", "4"], text: "Velg brikke" },
+      { keys: ["Trykk"], text: "Knappen, eller en brikke som blinker" },
+    ],
+    buttons: [{ label: "Start", primary: true, onClick: newGame }],
+  });
 })();

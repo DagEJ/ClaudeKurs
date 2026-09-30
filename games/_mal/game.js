@@ -62,11 +62,22 @@
   el.start.addEventListener("click", start);
   el.target.addEventListener("click", hit);
   document.addEventListener("keydown", (e) => {
-    if (e.code !== "Space") return;
+    if (e.code !== "Space" || Common.isOverlayOpen(board)) return;
     e.preventDefault();
     if (state.status === "playing") hit();
     else if (!e.repeat) start();
   });
 
+  // Kort med styringen før spillet starter (se CLAUDE.md).
+  const board = document.querySelector(".board");
   render();
+  Common.showOverlay(board, {
+    title: "Slik spiller du",
+    text: "Klikk så mange ganger du kan på 10 sekunder.",
+    howto: [
+      { keys: ["Mellomrom"], text: "Klikk" },
+      { keys: ["Trykk"], text: "Trykk på den store knappen" },
+    ],
+    buttons: [{ label: "Start", primary: true, onClick: start }],
+  });
 })();
