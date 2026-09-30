@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Othello – Minispill</title>
+  <link rel="stylesheet" href="../../shared/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container narrow">
+    <a class="back" href="../../index.html">← Alle spill</a>
+
+    <div class="game-header">
+      <h1>Othello</h1>
+      <div class="stats">
+        <div><span>Rekke</span> <strong id="streak">0</strong></div>
+        <div><span>Rekord</span> <strong id="best">0</strong></div>
+      </div>
+    </div>
+
+    <div class="levels" role="group" aria-label="Nivå">
+      <button class="level" data-level="lett" aria-pressed="false">Lett</button>
+      <button class="level" data-level="middels" aria-pressed="true">Middels</button>
+      <button class="level" data-level="vanskelig" aria-pressed="false">Vanskelig</button>
+    </div>
+
+    <div class="score" aria-label="Brikker">
+      <div id="side0" class="side"><span class="disc dark"></span> Du <strong id="count0">2</strong></div>
+      <div id="side1" class="side"><span class="disc light"></span> Datamaskinen <strong id="count1">2</strong></div>
+    </div>
+
+    <div id="board" class="board oboard">
+      <div id="grid" class="ogrid" aria-label="Brett, 6 ganger 6 ruter"></div>
+    </div>
+
+    <p id="message" class="message" aria-live="polite"></p>
+
+    <div class="controls">
+      <button id="new" class="btn primary">Nytt parti</button>
+    </div>
+
+    <p class="help">
+      Trykk på en rute med prikk, eller bruk piltastene og Enter.
+      <a href="REGLER.md">Regler</a>
+    </p>
+  </main>
+
+  <script src="../../shared/common.js"></script>
+  <script src="logic.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

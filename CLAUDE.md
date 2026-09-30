@@ -25,7 +25,7 @@ Hvert spill har disse filene:
 | `logic.test.js` | Tester for `logic.js` med Node sin innebygde testløper. |
 | `REGLER.md` | *Valgfri.* Spillets regler, med en egen del «Vår versjon» for valgene vi har tatt. Er den der, er det den som gjelder – hold den og koden i takt. |
 
-Eksisterende spill: `ludo` (mot datamaskinen), `2048` (tidsangrep, kan fortsette fritt), `fire-pa-rad` (mot datamaskinen, minimax, tre nivåer), `minesveiper` (tre nivåer, første klikk åpner alltid et område, flagg med langt trykk, beste tid per nivå). Se `games/registry.js` for full liste.
+Eksisterende spill: `ludo` (mot datamaskinen), `2048` (tidsangrep, kan fortsette fritt), `fire-pa-rad` (mot datamaskinen, minimax, tre nivåer), `minesveiper` (tre nivåer, første klikk åpner alltid et område, flagg med langt trykk, beste tid per nivå), `yatzy` (alene, norsk Yatzy med fritt valg, høyeste poengsum), `othello` (6×6 mot datamaskinen, tre nivåer, seiersrekke per nivå). Se `games/registry.js` for full liste.
 
 Planlagte spill: ingen for øyeblikket.
 
