@@ -14,7 +14,7 @@ games/_mal/           Mal for nye spill – kopier denne, ikke endre den
 games/<navn>/         Ett spill per mappe
 ```
 
-Hvert spill har nøyaktig disse filene:
+Hvert spill har disse filene:
 
 | Fil | Innhold |
 |---|---|
