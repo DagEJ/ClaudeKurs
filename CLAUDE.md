@@ -27,6 +27,11 @@ Hvert spill har disse filene:
 
 Eksisterende spill: `ludo` (du mot datamaskinen). Se `games/registry.js` for full liste.
 
+Planlagte spill, i denne rekkefølgen (valgt 2026-09-30):
+1. **2048** – øver på sveip/touch og piltaster.
+2. **Fire på rad** – mot datamaskinen, med en motstander som tenker fremover (minimax) og vanskelighetsgrader.
+3. **Minesveiper** – genererte brett der første klikk alltid er trygt; flagg med langt trykk på touch.
+
 ## Legge til et nytt spill
 
 1. Kopier `games/_mal/` til `games/<navn>/` (små bokstaver, bindestrek, f.eks. `snake`, `minesweeper`).
